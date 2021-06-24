@@ -1,9 +1,11 @@
 <template>
   <div>
-    <div class="pkmn-container">
-      <h1 id="query">{{ pokemon.name }}</h1>
-      <img :src="sprite" alt="" />
-    </div>
+    <router-link :to="pkmnPath" class="link">
+      <div class="pkmn-container">
+        <h1 id="query">{{ pokemon.name }}</h1>
+        <img :src="sprite" alt="" />
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -37,6 +39,9 @@ export default {
     sprite: function () {
       //return this.singlePokemon.sprites.front_default;
       return `https://pokeres.bastionbot.org/images/pokemon/${this.singlePokemon.id}.png`;
+    },
+    pkmnPath: function () {
+      return `/pkmn/${this.singlePokemon.id}`;
     },
   },
 };
