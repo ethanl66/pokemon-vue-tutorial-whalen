@@ -1,10 +1,13 @@
 <template>
   <div class="container">
-    <div class="poke-card">
+    <div
+      class="poke-card"
+      v-tilt="{ speed: 300, perspective: 1200, glare: true }"
+    >
       <h2>{{ singlePokemon.name }}</h2>
       <img :src="sprite" alt="" />
       <h3 :style="backgroundColor">{{ singlePokemon.types[0].type.name }}</h3>
-      <ul>
+      <ul class="poke-stats">
         <li v-for="stat in stats" :key="stat" class="poke-stat">
           <div :style="backgroundColor">{{ stat.stat.name }}</div>
           <div :style="backgroundColor">{{ stat.base_stat }}</div>
@@ -51,7 +54,7 @@ export default {
       return "background-color: " + this.colors[`${this.typeColor}`];
     },
   },
-  mounted: function () {
+  created: function () {
     this.fetchData();
   },
   methods: {
@@ -62,7 +65,6 @@ export default {
         );
         const singlePokemon = await result.json();
         this.singlePokemon = singlePokemon;
-
         this.stats = singlePokemon.stats;
         this.typeColor = this.singlePokemon.types[0].type.name;
       } catch (error) {
