@@ -11,7 +11,7 @@ const routes = [
     component: Home,
   },
   {
-    path: "/pkmn/:id",
+    path: "/pkmn/:id", //route/parameter(id)
     name: "pkmn",
 
     component: () => import("../views/pkmn.vue"),
