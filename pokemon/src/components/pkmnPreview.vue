@@ -2,13 +2,14 @@
   <div>
     <div class="pkmn-container">
       <h1 id="query">{{ pokemon.name }}</h1>
+      <img :src="sprite" alt="" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "pkmnPreview",
+  name: "PkmnPreview",
   props: ["pokemon"],
   data() {
     return {
@@ -23,7 +24,7 @@ export default {
     fetchData: async function () {
       try {
         const result = await fetch(
-          `https://pokeapi.co/api/v2/pokemon${this.pokemon.name}`
+          `https://pokeapi.co/api/v2/pokemon/${this.pokemon.name}`
         );
         const singlePokemon = await result.json();
         this.singlePokemon = singlePokemon;
@@ -32,12 +33,18 @@ export default {
       }
     },
   },
+  computed: {
+    sprite: function () {
+      //return this.singlePokemon.sprites.front_default;
+      return `https://pokeres.bastionbot.org/images/pokemon/${this.singlePokemon.id}.png`;
+    },
+  },
 };
 </script>
 
 <style>
 #query {
-  color: #111111;
+  color: #111;
   font-size: 2rem;
 }
 .pkmn-container {
